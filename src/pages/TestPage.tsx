@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import clsx from 'clsx';
-import { data } from '../data/data1';
 import { useInterval } from '../hooks/useInterval';
 import TextDisplay from '../components/TextDisplay';
 import { formatSecondsToClockTime } from '../components/TestPage/test-page.helper';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import {
+  startTest,
+  stopTest,
+  submitWord,
+  timerTick,
+} from '../components/TestPage/test.reducer';
 
 export interface TestPageProps {}
 
 const TestPage: React.FC<TestPageProps> = () => {
-  const [text] = useState(data[0].split(' '));
-  const [wordPosition, setWordPosition] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(60);
-  const [isStarted, setStarted] = useState(false);
-  const [wordCount, setWordCount] = useState(0);
-  const [textField, setTextField] = useState('');
+  const { words, selectedWordIndex, timeLeft, isStarted, wordCount, text } =
+    useAppSelector(state => state.test);
+  const dispatch = useAppDispatch();
 
   const { clearTimer } = useInterval(() => {
     if (!isStarted) {
@@ -21,26 +24,19 @@ const TestPage: React.FC<TestPageProps> = () => {
     }
     if (timeLeft === 0) {
       clearTimer();
-      setStarted(false);
+      dispatch(stopTest());
       return;
     }
 
-    setTimeLeft(timeLeft - 1);
+    dispatch(timerTick());
   }, 1000);
 
   function handleTextChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (!isStarted) {
-      setStarted(true);
+      dispatch(startTest());
     }
     const { value } = e.target;
-
-    if (value === text[wordPosition].concat(' ')) {
-      setWordPosition(wordPosition + 1);
-      setTextField('');
-      setWordCount(wordCount + 1);
-    } else {
-      setTextField(value);
-    }
+    dispatch(submitWord(value));
   }
 
   return (
@@ -50,7 +46,7 @@ const TestPage: React.FC<TestPageProps> = () => {
           Typing Test
         </h1>
 
-        <TextDisplay text={text} selectedWordIndex={wordPosition} />
+        <TextDisplay text={words} selectedWordIndex={selectedWordIndex} />
 
         <div
           className={clsx('mt-5', 'flex flex-col-reverse md:flex-row gap-3')}
@@ -65,7 +61,7 @@ const TestPage: React.FC<TestPageProps> = () => {
             )}
             placeholder="start typing to start the test"
             onChange={handleTextChange}
-            value={textField}
+            value={text}
             disabled={timeLeft === 0}
           />
 
