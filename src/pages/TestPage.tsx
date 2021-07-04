@@ -13,22 +13,14 @@ import {
   timerTick,
 } from '../components/TestPage/test.reducer';
 import TypingField from '../components/TestPage/TypingField';
+import ResultSummary from '../components/TestPage/ResultSummary';
 
 export interface TestPageProps {}
 
 const TestPage: React.FC<TestPageProps> = () => {
-  const {
-    words,
-    selectedWordIndex,
-    timeLeft,
-    isStarted,
-    wordCount,
-    text,
-    correctWordCount,
-    wrongWordCount,
-  } = useAppSelector(state => state.test);
+  const { words, selectedWordIndex, timeLeft, isStarted, text } =
+    useAppSelector(state => state.test);
   const dispatch = useAppDispatch();
-  const accuracy = ((correctWordCount / wordCount) * 100).toFixed(2);
 
   const { clearTimer } = useInterval(() => {
     if (!isStarted) {
@@ -101,34 +93,7 @@ const TestPage: React.FC<TestPageProps> = () => {
           </div>
         </div>
 
-        {timeLeft === 0 && (
-          <>
-            <h2 className="text-4xl mt-5">Results</h2>
-            <div
-              className={clsx(
-                'mt-3 py-2 px-4',
-                'bg-gray-600 text-gray-100',
-                'rounded',
-              )}
-            >
-              <div
-                className={clsx('grid grid-cols-2', 'items-center', 'text-3xl')}
-              >
-                <span>Typing Speed</span>
-                <span>
-                  <span className={clsx('text-8xl')}>{wordCount || 88}</span>
-                  <span className={clsx('text-5xl')}> WPM</span>
-                </span>
-
-                <span>Accuracy</span>
-                <span className={clsx('text-5xl')}>{accuracy}%</span>
-
-                <span>Wrong words count</span>
-                <span className={clsx('text-5xl')}>{wrongWordCount}</span>
-              </div>
-            </div>
-          </>
-        )}
+        {timeLeft === 0 && <ResultSummary />}
       </div>
     </div>
   );
