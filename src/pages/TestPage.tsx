@@ -12,6 +12,7 @@ import {
   textChange,
   timerTick,
 } from '../components/TestPage/test.reducer';
+import TypingField from '../components/TestPage/TypingField';
 
 export interface TestPageProps {}
 
@@ -79,18 +80,11 @@ const TestPage: React.FC<TestPageProps> = () => {
         <div
           className={clsx('mt-5', 'flex flex-col-reverse md:flex-row gap-3')}
         >
-          <input
-            type="text"
-            className={clsx(
-              'px-4 py-3',
-              'rounded',
-              'flex-1',
-              'text-black text-3xl',
-            )}
-            placeholder="start typing to start the test"
+          <TypingField
             onChange={handleTextChange}
             value={text}
             disabled={timeLeft === 0}
+            isTestRunning={isStarted && timeLeft > 0}
           />
 
           <div>
