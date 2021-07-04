@@ -108,21 +108,32 @@ const TestPage: React.FC<TestPageProps> = () => {
         </div>
 
         {timeLeft === 0 && (
-          <div className={clsx('mt-5 py-10')}>
-            <h2 className="text-4xl my-5">Results</h2>
+          <>
+            <h2 className="text-4xl mt-5">Results</h2>
             <div
-              className={clsx('grid grid-cols-2', 'items-center', 'text-3xl')}
+              className={clsx(
+                'mt-3 py-2 px-4',
+                'bg-gray-600 text-gray-100',
+                'rounded',
+              )}
             >
-              <span>Words Per Minute (WPM)</span>
-              <span className={clsx('text-9xl')}>{wordCount}</span>
+              <div
+                className={clsx('grid grid-cols-2', 'items-center', 'text-3xl')}
+              >
+                <span>Typing Speed</span>
+                <span>
+                  <span className={clsx('text-8xl')}>{wordCount || 88}</span>
+                  <span className={clsx('text-5xl')}> WPM</span>
+                </span>
 
-              <span>Accuracy</span>
-              <span className={clsx('text-5xl')}>{accuracy}%</span>
+                <span>Accuracy</span>
+                <span className={clsx('text-5xl')}>{accuracy}%</span>
 
-              <span>Wrong words count</span>
-              <span className={clsx('text-5xl')}>{wrongWordCount}</span>
+                <span>Wrong words count</span>
+                <span className={clsx('text-5xl')}>{wrongWordCount}</span>
+              </div>
             </div>
-          </div>
+          </>
         )}
       </div>
     </div>

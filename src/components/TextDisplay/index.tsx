@@ -31,7 +31,7 @@ const TextDisplay: React.FC<TextDisplayProps> = ({
       className={clsx(
         'bg-white text-black',
         'py-3 px-4',
-        'rounded',
+        'rounded select-none',
         'text-4xl',
         'flex flex-wrap gap-x-2',
       )}
