@@ -14,6 +14,8 @@ interface TestState {
   timeLeft: number;
   isStarted: boolean;
   wordCount: number;
+  correctWordCount: number;
+  wrongWordCount: number;
   text: string;
 }
 
@@ -23,6 +25,8 @@ const initialState: TestState = {
   timeLeft: 60,
   isStarted: false,
   wordCount: 0,
+  correctWordCount: 0,
+  wrongWordCount: 0,
   text: '',
 };
 
@@ -50,6 +54,7 @@ export const testSlice = createSlice({
       draftState.selectedWordIndex += 1;
       draftState.text = '';
       draftState.wordCount += 1;
+      draftState.correctWordCount += 1;
     },
     submitWrongWord: draftState => {
       const { selectedWordIndex } = draftState;
@@ -57,6 +62,7 @@ export const testSlice = createSlice({
       draftState.selectedWordIndex += 1;
       draftState.text = '';
       draftState.wordCount += 1;
+      draftState.wrongWordCount += 1;
     },
   },
 });

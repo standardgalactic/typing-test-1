@@ -16,9 +16,18 @@ import {
 export interface TestPageProps {}
 
 const TestPage: React.FC<TestPageProps> = () => {
-  const { words, selectedWordIndex, timeLeft, isStarted, wordCount, text } =
-    useAppSelector(state => state.test);
+  const {
+    words,
+    selectedWordIndex,
+    timeLeft,
+    isStarted,
+    wordCount,
+    text,
+    correctWordCount,
+    wrongWordCount,
+  } = useAppSelector(state => state.test);
   const dispatch = useAppDispatch();
+  const accuracy = ((correctWordCount / wordCount) * 100).toFixed(2);
 
   const { clearTimer } = useInterval(() => {
     if (!isStarted) {
@@ -106,6 +115,12 @@ const TestPage: React.FC<TestPageProps> = () => {
             >
               <span>Words Per Minute (WPM)</span>
               <span className={clsx('text-9xl')}>{wordCount}</span>
+
+              <span>Accuracy</span>
+              <span className={clsx('text-5xl')}>{accuracy}%</span>
+
+              <span>Wrong words count</span>
+              <span className={clsx('text-5xl')}>{wrongWordCount}</span>
             </div>
           </div>
         )}
