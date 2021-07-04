@@ -36,22 +36,31 @@ const TextDisplay: React.FC<TextDisplayProps> = ({
         'flex flex-wrap gap-x-2',
       )}
     >
-      {words.map((wordData, idx) => (
-        <span
-          key={wordData.word + Number(idx)}
-          className={clsx(
-            'mr-0 px-2 py-2',
-            selectedWordIndex === idx && 'bg-gray-400 dark:bg-gray-300 rounded',
-            wordData.status === 'CORRECT' && 'text-green-500',
-            wordData.status === 'WRONG' && 'text-red-500',
-            selectedWordIndex === idx &&
-              !wordData.word.startsWith(text) &&
-              'bg-red-500',
-          )}
-        >
-          {wordData.word}
-        </span>
-      ))}
+      {words.map((wordData, idx) => {
+        const shouldHighlight =
+          selectedWordIndex === idx && wordData.word.startsWith(text);
+        const draftWrongHighlight =
+          selectedWordIndex === idx && !wordData.word.startsWith(text);
+        const isAttemptedCorrectly = wordData.status === 'CORRECT';
+        const isAttemptedWrongly = wordData.status === 'WRONG';
+
+        return (
+          <span
+            key={wordData.word + Number(idx)}
+            className={clsx(
+              'px-2 py-2',
+
+              shouldHighlight && 'bg-gray-400 dark:bg-gray-300 rounded',
+              draftWrongHighlight && 'bg-red-500 rounded',
+
+              isAttemptedCorrectly && 'text-green-500',
+              isAttemptedWrongly && 'text-red-500',
+            )}
+          >
+            {wordData.word}
+          </span>
+        );
+      })}
     </div>
   );
 };

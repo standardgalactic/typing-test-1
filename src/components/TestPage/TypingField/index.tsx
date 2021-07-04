@@ -27,7 +27,7 @@ const TypingField: React.FC<TypingFieldProps> = ({
       ref={inputRef}
       type="text"
       className={clsx(
-        'px-4 py-3',
+        'px-6 py-3',
         'flex-1',
         'text-black dark:text-black',
         'text-3xl',
