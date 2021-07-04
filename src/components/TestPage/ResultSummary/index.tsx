@@ -16,7 +16,7 @@ const ResultSummary: React.FC<ResultSummaryProps> = () => {
       <div
         className={clsx(
           'mt-3 py-2 px-4',
-          'bg-gray-600 text-gray-100',
+          'bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-100',
           'rounded',
         )}
       >

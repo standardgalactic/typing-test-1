@@ -14,6 +14,7 @@ import {
 } from '../components/TestPage/test.reducer';
 import TypingField from '../components/TestPage/TypingField';
 import ResultSummary from '../components/TestPage/ResultSummary';
+import AppBar from '../components/AppBar';
 
 export interface TestPageProps {}
 
@@ -56,11 +57,14 @@ const TestPage: React.FC<TestPageProps> = () => {
   }
 
   return (
-    <div className={clsx('min-h-screen', 'bg-gray-800 text-white')}>
+    <div
+      className={clsx(
+        'min-h-screen',
+        'bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-100',
+      )}
+    >
       <div className={clsx('max-w-4xl mx-auto px-4')}>
-        <h1 className={clsx('text-5xl font-medium', 'py-5 mb-5')}>
-          Typing Test
-        </h1>
+        <AppBar />
 
         <TextDisplay
           words={words}
@@ -79,17 +83,16 @@ const TestPage: React.FC<TestPageProps> = () => {
             isTestRunning={isStarted && timeLeft > 0}
           />
 
-          <div>
-            <div
-              className={clsx(
-                'px-4 py-3',
-                'bg-white text-black',
-                'rounded',
-                'text-3xl',
-              )}
-            >
-              {formatSecondsToClockTime(timeLeft)}
-            </div>
+          <div
+            className={clsx(
+              'px-4',
+              'bg-gray-200 dark:bg-white text-black dark:text-black',
+              'rounded',
+              'text-3xl',
+              'flex items-center',
+            )}
+          >
+            {formatSecondsToClockTime(timeLeft)}
           </div>
         </div>
 

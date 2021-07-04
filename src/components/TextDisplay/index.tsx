@@ -29,7 +29,7 @@ const TextDisplay: React.FC<TextDisplayProps> = ({
   return (
     <div
       className={clsx(
-        'bg-white text-black',
+        'bg-gray-200 dark:bg-white text-black',
         'py-3 px-4',
         'rounded select-none',
         'text-4xl',
@@ -41,7 +41,7 @@ const TextDisplay: React.FC<TextDisplayProps> = ({
           key={wordData.word + Number(idx)}
           className={clsx(
             'mr-0 px-2 py-2',
-            selectedWordIndex === idx && 'bg-gray-300 rounded',
+            selectedWordIndex === idx && 'bg-gray-400 dark:bg-gray-300 rounded',
             wordData.status === 'CORRECT' && 'text-green-500',
             wordData.status === 'WRONG' && 'text-red-500',
             selectedWordIndex === idx &&

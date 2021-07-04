@@ -26,7 +26,13 @@ const TypingField: React.FC<TypingFieldProps> = ({
     <input
       ref={inputRef}
       type="text"
-      className={clsx('px-4 py-3', 'rounded', 'flex-1', 'text-black text-3xl')}
+      className={clsx(
+        'px-4 py-3',
+        'flex-1',
+        'text-black dark:text-black',
+        'text-3xl',
+        'border-2 dark:border-gray-500 rounded',
+      )}
       placeholder={`${!isTestRunning ? 'start typing to start the test' : ''}`}
       onChange={onChange}
       value={value}
