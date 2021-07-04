@@ -46,7 +46,11 @@ const TestPage: React.FC<TestPageProps> = () => {
           Typing Test
         </h1>
 
-        <TextDisplay text={words} selectedWordIndex={selectedWordIndex} />
+        <TextDisplay
+          words={words}
+          selectedWordIndex={selectedWordIndex}
+          wordsToShow={23}
+        />
 
         <div
           className={clsx('mt-5', 'flex flex-col-reverse md:flex-row gap-3')}

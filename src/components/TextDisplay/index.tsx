@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
 export interface TextDisplayProps {
-  text: string[];
+  words: string[];
   selectedWordIndex: number;
+  wordsToShow: number;
 }
 
 const TextDisplay: React.FC<TextDisplayProps> = ({
-  text,
-  selectedWordIndex,
+  words: allWords,
+  selectedWordIndex: mainSelectedWordIndex,
+  wordsToShow,
 }) => {
+  const [startIndex, setStartIndex] = useState(0);
+
+  useEffect(() => {
+    if (mainSelectedWordIndex >= startIndex + wordsToShow) {
+      setStartIndex(startIndex + wordsToShow);
+    }
+  }, [mainSelectedWordIndex]);
+
+  const selectedWordIndex = mainSelectedWordIndex - startIndex;
+  const words = allWords.slice(startIndex, startIndex + wordsToShow);
+
   return (
     <div
       className={clsx(
@@ -20,7 +33,7 @@ const TextDisplay: React.FC<TextDisplayProps> = ({
         'flex flex-wrap gap-x-2',
       )}
     >
-      {text.map((word, idx) => (
+      {words.map((word, idx) => (
         <span
           key={word + Number(idx)}
           className={clsx(
