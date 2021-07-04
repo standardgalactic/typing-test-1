@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
+import { WordData } from '../TestPage/test.reducer';
 
 export interface TextDisplayProps {
-  words: string[];
+  words: WordData[];
   selectedWordIndex: number;
   wordsToShow: number;
 }
@@ -33,15 +34,17 @@ const TextDisplay: React.FC<TextDisplayProps> = ({
         'flex flex-wrap gap-x-2',
       )}
     >
-      {words.map((word, idx) => (
+      {words.map((wordData, idx) => (
         <span
-          key={word + Number(idx)}
+          key={wordData.word + Number(idx)}
           className={clsx(
             'mr-0 px-2 py-2',
             selectedWordIndex === idx && 'bg-gray-300 rounded',
+            wordData.status === 'CORRECT' && 'text-green-500',
+            wordData.status === 'WRONG' && 'text-red-500',
           )}
         >
-          {word}
+          {wordData.word}
         </span>
       ))}
     </div>

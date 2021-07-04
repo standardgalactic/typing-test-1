@@ -7,7 +7,9 @@ import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import {
   startTest,
   stopTest,
-  submitWord,
+  submitCorrectWord,
+  submitWrongWord,
+  textChange,
   timerTick,
 } from '../components/TestPage/test.reducer';
 
@@ -32,11 +34,22 @@ const TestPage: React.FC<TestPageProps> = () => {
   }, 1000);
 
   function handleTextChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { value } = e.target;
+    if (!value.trim()) {
+      return;
+    }
     if (!isStarted) {
       dispatch(startTest());
     }
-    const { value } = e.target;
-    dispatch(submitWord(value));
+    if (value.endsWith(' ')) {
+      if (value === words[selectedWordIndex].word.concat(' ')) {
+        dispatch(submitCorrectWord());
+      } else {
+        dispatch(submitWrongWord());
+      }
+    } else {
+      dispatch(textChange(value));
+    }
   }
 
   return (
