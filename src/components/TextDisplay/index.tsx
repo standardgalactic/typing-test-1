@@ -21,7 +21,7 @@ const TextDisplay: React.FC<TextDisplayProps> = ({
     if (mainSelectedWordIndex >= startIndex + wordsToShow) {
       setStartIndex(startIndex + wordsToShow);
     }
-  }, [mainSelectedWordIndex]);
+  }, [mainSelectedWordIndex, wordsToShow, startIndex]);
 
   const selectedWordIndex = mainSelectedWordIndex - startIndex;
   const words = allWords.slice(startIndex, startIndex + wordsToShow);

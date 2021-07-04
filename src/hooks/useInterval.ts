@@ -31,7 +31,7 @@ export function useInterval(callback: Callback, delay: number) {
     }
     const id = window.setInterval(tick, delay);
     setTimerId(id);
-    return () => clearTimer();
+    return () => clearInterval(id);
   }, [delay]);
 
   return {
