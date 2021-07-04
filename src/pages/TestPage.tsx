@@ -36,6 +36,7 @@ const TestPage: React.FC<TestPageProps> = () => {
   function handleTextChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { value } = e.target;
     if (!value.trim()) {
+      dispatch(textChange(value.trim()));
       return;
     }
     if (!isStarted) {
@@ -63,6 +64,7 @@ const TestPage: React.FC<TestPageProps> = () => {
           words={words}
           selectedWordIndex={selectedWordIndex}
           wordsToShow={23}
+          text={text}
         />
 
         <div

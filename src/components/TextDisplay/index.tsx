@@ -6,12 +6,14 @@ export interface TextDisplayProps {
   words: WordData[];
   selectedWordIndex: number;
   wordsToShow: number;
+  text: string;
 }
 
 const TextDisplay: React.FC<TextDisplayProps> = ({
   words: allWords,
   selectedWordIndex: mainSelectedWordIndex,
   wordsToShow,
+  text,
 }) => {
   const [startIndex, setStartIndex] = useState(0);
 
@@ -42,6 +44,9 @@ const TextDisplay: React.FC<TextDisplayProps> = ({
             selectedWordIndex === idx && 'bg-gray-300 rounded',
             wordData.status === 'CORRECT' && 'text-green-500',
             wordData.status === 'WRONG' && 'text-red-500',
+            selectedWordIndex === idx &&
+              !wordData.word.startsWith(text) &&
+              'bg-red-500',
           )}
         >
           {wordData.word}
