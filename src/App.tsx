@@ -1,12 +1,8 @@
 import React from 'react';
-import clsx from 'clsx';
+import TestPage from './pages/TestPage';
 
 function App() {
-  return (
-    <div className={clsx('h-screen', 'bg-gray-800 text-white', 'p-2')}>
-      <h1 className={clsx('text-5xl font-medium')}>Typing Test</h1>
-    </div>
-  );
+  return <TestPage />;
 }
 
 export default App;
