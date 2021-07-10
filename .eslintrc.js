@@ -7,6 +7,8 @@ module.exports = {
     'plugin:react/recommended',
     'airbnb',
     'plugin:react-hooks/recommended',
+    'next',
+    'next/core-web-vitals',
     'plugin:prettier/recommended',
   ],
   parser: '@typescript-eslint/parser',

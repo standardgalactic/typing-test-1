@@ -1,5 +1,7 @@
+const isProd = process.env.NODE_ENV === 'production';
+
 module.exports = {
-  mode: 'jit',
+  ...(isProd && { mode: 'jit' }),
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: 'class',
   theme: {

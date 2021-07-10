@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import Head from 'next/head';
 import { useInterval } from '../hooks/useInterval';
 import TextDisplay from '../components/TextDisplay';
 import { formatSecondsToClockTime } from '../components/TestPage/test-page.helper';
@@ -14,6 +15,7 @@ import {
 } from '../components/TestPage/test.reducer';
 import TypingField from '../components/TestPage/TypingField';
 import ResultSummary from '../components/TestPage/ResultSummary';
+import { withBasicLayout } from '../components/BasicLayout';
 
 export interface TestPageProps {}
 
@@ -57,6 +59,15 @@ const TestPage: React.FC<TestPageProps> = () => {
 
   return (
     <>
+      <Head>
+        <title key="title">Typing Test | Test your typing skills</title>
+        <meta
+          key="description"
+          name="description"
+          content="Test your typing skills"
+        />
+      </Head>
+
       <TextDisplay
         words={words}
         selectedWordIndex={selectedWordIndex}
@@ -90,4 +101,4 @@ const TestPage: React.FC<TestPageProps> = () => {
   );
 };
 
-export default TestPage;
+export default withBasicLayout(TestPage);

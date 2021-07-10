@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { Moon, Sun } from 'react-feather';
+import Link from 'next/link';
 import { useDarkMode } from '../../hooks/useDarkMode';
 
 export interface AppBarProps {}
@@ -11,7 +12,7 @@ const AppBar: React.FC<AppBarProps> = () => {
   return (
     <header className={clsx('flex items-center justify-between', 'py-3')}>
       <h1 className={clsx('text-xl font-medium')}>
-        <a href="/">Typing Test</a>
+        <Link href="/">Typing Test</Link>
       </h1>
 
       <button
